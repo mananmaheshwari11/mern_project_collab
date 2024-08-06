@@ -12,3 +12,12 @@ export const hashedPassword=async(string)=>{
         console.log("error in password encryption");
     }
 }
+
+export const checkPassword=async(password1,password2)=>{
+    try {
+        const value= await bcrypt.compare(password1,password2)
+        return value;
+    } catch (error) {
+        console.log("Error in password decryption")
+    }
+}
