@@ -47,5 +47,13 @@ catch(error){
 }
 }
 export const logIn=async(req,res)=>{
-    
+    try {
+        
+    } catch (error) {
+        return res.status(400).send({
+            success:false,
+            message:"Error in user Sign-in",
+            error
+        })
+    }
 }
