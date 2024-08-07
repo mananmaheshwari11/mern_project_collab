@@ -7,7 +7,6 @@ import cors from 'cors';
 import morgan from 'morgan'
 
 const app = express()
-const PORT = 3000
 app.use(express.json());
 
 //DB connection
@@ -22,6 +21,7 @@ app.use('/api/auth',authRoutes)
 app.use(cors())
 app.use(morgan('dev'))
 // Server start
+const PORT=process.env.PORT
 app.listen(PORT,()=>{
     console.log(`Listening to port ${PORT}`)
 })
