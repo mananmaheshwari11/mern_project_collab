@@ -14,7 +14,7 @@ dotenv.config()
 connectDb();
 
 //Routes
-app.use('/api', taskRoutes);
+app.use('/api/task', taskRoutes);
 app.use('/api/auth',authRoutes)
 
 //middleware
