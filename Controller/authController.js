@@ -1,6 +1,8 @@
 import userModel from "../models/userModel.js";
-import { hashedPassword } from "../Helper/authHelper.js";
-
+import { checkPassword, hashedPassword } from "../Helper/authHelper.js";
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config()
 //User Registration
 export const registerUser=async(req,res)=>{               //request,response
     try{
@@ -48,8 +50,33 @@ catch(error){
 }
 export const logIn=async(req,res)=>{
     try {
-        
-    } catch (error) {
+        const {email,password} = req.fields;
+        if(email==null){
+            return res.status(400).send({message:"Enter correct email!"});
+        }
+        if(!password){
+            return res.status(400).send({message:"Password is required!"});
+        }
+        const user = await userModel.findOne({email});
+        if(await checkPassword(password,user.password)){
+            const token=jwt.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:'7d'});
+            return res.status(201).send({
+                success:true,
+                message:"User Logged-In Successfully",
+                token,
+                user:{
+                    name:user.name,
+                    email:user.email,
+                    phone_no:user.phone_no
+                }
+            })
+        }
+        else{
+            return res.status(400).send({
+                message:"Invalid user email or password"
+            })
+        }
+    } catch (error){
         return res.status(400).send({
             success:false,
             message:"Error in user Sign-in",

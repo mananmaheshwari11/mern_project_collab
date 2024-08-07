@@ -3,6 +3,8 @@ import taskRoutes from './routes/taskRoutes.js'
 import dotenv from 'dotenv'
 import connectDb from './config/db.js'
 import authRoutes from './routes/authRoutes.js'
+import cors from 'cors';
+import morgan from 'morgan'
 
 const app = express()
 const PORT = 3000
@@ -16,6 +18,9 @@ connectDb();
 app.use('/api', taskRoutes);
 app.use('/api/auth',authRoutes)
 
+//middleware
+app.use(cors())
+app.use(morgan('dev'))
 // Server start
 app.listen(PORT,()=>{
     console.log(`Listening to port ${PORT}`)
