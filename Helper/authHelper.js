@@ -9,7 +9,8 @@ export const hashedPassword=async(string)=>{
         return hashed;
     }
     catch(error){
-        console.log("error in password encryption");
+        console.log("error in password encryption")
+        console.log(error)
     }
 }
 

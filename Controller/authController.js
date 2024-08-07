@@ -32,7 +32,7 @@ export const registerUser=async(req,res)=>{               //request,response
     if(password!=cfmpwd){
         return res.status(400).send({message:"Password & Confirm Password should be same"})
     }
-    const hashedpassword=hashedPassword(password)
+    const hashedpassword=await hashedPassword(password)
     const user=await new userModel({name:name,email:email,password:hashedpassword,phone_no:phone_no}).save()
     return res.status(201).send({
         success:true,
