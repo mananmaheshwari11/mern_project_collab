@@ -6,7 +6,7 @@ dotenv.config()
 //User Registration
 export const registerUser=async(req,res)=>{               //request,response
     try{
-    const {name,email,password,cfmpwd,phone_no}=req.fields
+    const {name,email,password,cfmpwd,phone_no}=req.body
     if(!name){
         return res.status(404).send({message:"Name is required"});
     }
@@ -50,7 +50,7 @@ catch(error){
 }
 export const logIn=async(req,res)=>{
     try {
-        const {email,password} = req.fields;
+        const {email,password} = req.body;
         if(email==null){
             return res.status(400).send({message:"Enter correct email!"});
         }
