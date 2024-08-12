@@ -1,10 +1,11 @@
 import express from 'express';
-import userModel from '../models/userModel.js'
+import ExpressFormidable from 'express-formidable';
 import { logIn, registerUser } from '../Controller/authController.js';
+
 
 const route = express.Router();
 
-route.post('/signup',registerUser);
-route.post('/signin',logIn);
+route.post('/signup',ExpressFormidable(),registerUser);
+route.post('/signin',ExpressFormidable(),logIn);
 
 export default route;
