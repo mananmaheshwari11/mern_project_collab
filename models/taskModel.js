@@ -1,6 +1,5 @@
 import mongoose from "mongoose"
 import { Schema } from "mongoose"
-//import User from "userModel.js"
 
 const taskSchema = new mongoose.Schema({
     name : {
@@ -9,12 +8,12 @@ const taskSchema = new mongoose.Schema({
     },
     assignedBy: {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'userModel',
         required: true
     },
     assignedTo: {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'userModel',
         required: [true,"Task needs to be assigned to atleast one candidate"]
     },
     createdAt:{

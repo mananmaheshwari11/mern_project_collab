@@ -7,6 +7,9 @@ import cors from 'cors';
 import morgan from 'morgan'
 
 const app = express()
+//middleware
+app.use(morgan('dev'))
+app.use(cors())
 app.use(express.json());
 
 //DB connection
@@ -17,9 +20,6 @@ connectDb();
 app.use('/api/task', taskRoutes);
 app.use('/api/auth',authRoutes)
 
-//middleware
-app.use(cors())
-app.use(morgan('dev'))
 // Server start
 const PORT=process.env.PORT
 app.listen(PORT,()=>{

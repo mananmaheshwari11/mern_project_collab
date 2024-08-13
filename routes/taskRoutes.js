@@ -26,13 +26,14 @@ router.post('/', async (req, res) => {
   
 // Read all Tasks
 router.get('/', async (req, res) => {
-try {
-    const tasks = await Task.find();
-    res.status(200).json(tasks);
-} catch (err) {
-    res.status(500).json({ error: err.message });
-}
-});
+    try {
+      const tasks = await Task.find().populate('assignedBy', 'name').populate('assignedTo', 'name');
+      res.status(200).json(tasks);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+  
 
 // Read single Task by ID
 router.get('/:id', async (req, res) => {
