@@ -1,0 +1,48 @@
+.task-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    margin: 10px 0;
+    transition: transform 0.2s ease-in-out, background-color 0.3s ease;
+  }
+  
+  .task-card.completed {
+    background-color: #e0ffe0; /* Light green background for completed tasks */
+  }
+  
+  .task-card h2 {
+    font-size: 1.5rem;
+    color: #0086A3;
+    margin-bottom: 10px;
+  }
+  
+  .due-date {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .assignee-completed {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .assignee {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .completed-checkbox label {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .completed-checkbox input {
+    margin-right: 5px;
+  }
+  

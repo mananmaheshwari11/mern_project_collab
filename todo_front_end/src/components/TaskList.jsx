@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import './Tasklist.css'
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
-
   useEffect(() => {
     // Fetch tasks from the backend
     const fetchTasks = async () => {
@@ -24,13 +23,15 @@ const TaskList = () => {
       {tasks.length > 0 ? (
         <ul>
           {tasks.map((task) => (
-            <li key={task._id}>
-              <h3>{task.name}</h3>
-              <p><strong>Assigned By:</strong> {task.assignedBy.name}</p> {/* Assuming User model has a 'name' field */}
-              <p><strong>Assigned To:</strong> {task.assignedTo.name}</p>
-              <p><strong>Created At:</strong> {new Date(task.createdAt).toLocaleString()}</p>
-              <p><strong>Due Date:</strong> {new Date(task.dueDate).toLocaleString()}</p>
-            </li>
+             <div className={`task-card ${false ? 'completed' : ''}`}>
+             <h2>{task.name}</h2>
+             <p className="due-date">Due Date: {task.dueDate}</p>
+             <div className="assignee-completed">
+               <p className="assignee">Assigned to: {task.assignedTo.name}</p>
+               <div className="completed-checkbox">
+               </div>
+             </div>
+           </div>
           ))}
         </ul>
       ) : (

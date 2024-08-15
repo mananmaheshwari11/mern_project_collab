@@ -1,15 +1,14 @@
 import express from 'express';
 const router = express.Router();
 import Task from '../models/taskModel.js'
-import User from '../models/userModel.js'
-import taskModel from '../models/taskModel.js';
+import userModel from '../models/userModel.js';
+
 
 //Create Task
 router.post('/', async (req, res) => {
     try {
-        const assignedToUser = await User.findOne({ name: req.body.assignedTo });
-        const assignedByUser = await User.findOne({ name: req.body.assignedBy });
-
+        const assignedToUser = await userModel.findOne({ name: req.body.assignedTo });
+        const assignedByUser = await userModel.findOne({ name: req.body.assignedBy });
         if (!assignedToUser || !assignedByUser) {
             return res.status(400).json({ error: "Invalid user names provided" });
         }

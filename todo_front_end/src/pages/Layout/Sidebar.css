@@ -1,0 +1,36 @@
+.sidebar {
+  width: 250px;
+  background-color: #000; /* Black color */
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding-top: 20px;
+  overflow: hidden; /* Make sidebar non-scrollable */
+}
+
+.sidebar-link {
+  color: #fff; /* White text color */
+  text-decoration: none;
+  padding: 15px 20px;
+  font-size: 16px;
+  display: block;
+}
+
+.sidebar-link:hover {
+  background-color: #1c1c1c; /* Slightly lighter black on hover */
+}
+
+.layout-container {
+  display: flex;
+  height: 100vh;
+}
+
+.content {
+  margin-left: 250px; /* Adjust the content to the right of the sidebar */
+  padding: 20px;
+  width: calc(100% - 250px);
+  overflow-y: auto; /* Content area can scroll */
+}

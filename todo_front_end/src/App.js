@@ -1,45 +1,26 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import Login from './pages/Auth/Login';
+import Signup from './pages/Auth/Signup';
+import Access from './pages/Auth/Access';
 import Home from './pages/Home';
-import Today from './pages/Today';
-import ScheduledLater from './pages/ScheduledLater';
-import Missed from './pages/Missed';
-import './App.css';
+import PageNotFound from './pages/PageNotFound';
+import CreateTask from './pages/CreateTask';
+import MyTask from './pages/MyTask';
 
 const App = () => {
   return (
-    <Router>
-      <div className="app-container">
-        {/* Side Navigation Bar */}
-        <nav className="side-nav">
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/today">Today</Link>
-            </li>
-            <li>
-              <Link to="/scheduled-later">Scheduled Later</Link>
-            </li>
-            <li>
-              <Link to="/missed">Missed</Link>
-            </li>
-          </ul>
-        </nav>
-
-        {/* Main Content Area */}
-        <div className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/today" element={<Today />} />
-            <Route path="/scheduled-later" element={<ScheduledLater />} />
-            <Route path="/missed" element={<Missed />} />
-          </Routes>
-        </div>
-      </div>
-    </Router>
-  );
-};
+    <Routes>
+      <Route path='/login' element={<Login/>}/>
+      <Route path='/signup' element={<Signup/>}/>
+      <Route path='*' element={<PageNotFound/>}/>
+      <Route path='/user' element={<Access/>}>
+      </Route>
+      <Route path='/' element={<Home/>}/>
+      <Route path='/my-task' element={<MyTask/>}/>
+      <Route path='/create' element={<CreateTask/>}/>
+    </Routes>
+  )
+}
 
 export default App;

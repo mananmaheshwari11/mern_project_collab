@@ -1,0 +1,132 @@
+/* Sidebar-related styling */
+.page-container {
+    margin-left: 150px;
+    margin-right: 150px;    
+    padding: 20px;
+  }
+  
+  /* General page styling */
+  .page-title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .page-forms {
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #444;
+    text-align: center;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  /* Dropdown Styling */
+  .dropdown-menu {
+    width: 100%;
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 10px #b027fa;
+    border-radius: 4px;
+    color: white;
+    background-color: #b027fa;
+  }
+  
+  .form-check {
+    margin-bottom: 10px;
+  }
+  
+  .form-check-input {
+    margin-right: 8px;
+  }
+  
+  .dropdown-toggle {
+    width: 100%;
+    text-align: center;
+    background-color: #b027fa;
+    border-color: #b027fa;
+    color: #fff;
+    font-family: serif;
+  }
+  .dropdown-toggle:hover{
+    background-color: #a24ed0;
+    border-color: #771fa6;
+  }
+  
+  /* Date input styling */
+  input[type='date'] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  /* Submit Button Styling */
+  .button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #b027fa;
+    border-color: #b027fa;
+    margin-top: 20px;
+    font-family: serif;
+    color: white;
+    border-radius: 10px;
+  }
+  
+  .button:hover {
+    background-color: #b027fa;
+    border-color: #b027fa;
+    opacity: 0.8;
+  }
+  
+  .update-button{
+    background-color: #b027fa;
+    color: white;
+    border-color: #b027fa;
+    border-radius: 5px;
+    box-shadow: whitesmoke;
+    margin-right: 10px;
+    padding: 3px 5px;
+  }
+  .delete-button{
+    margin-left: 10px;
+    background-color: #b027fa;
+    color: white;
+    border-color: #b027fa;
+    border-radius: 5px;
+    box-shadow: whitesmoke;
+    margin-right: 0px;
+    padding: 3px 5px;
+  }
+  .update-button:hover{
+    opacity: 0.8;
+  }
+  .delete-button:hover{
+    opacity: 0.8;
+  }
+
+  .listing{
+    border: 5px solid #0f0b0b;
+  }

@@ -65,6 +65,7 @@ export const logIn=async(req,res)=>{
                 message:"User Logged-In Successfully",
                 token,
                 user:{
+                    id:user._id,
                     name:user.name,
                     email:user.email,
                     phone_no:user.phone_no
@@ -80,6 +81,23 @@ export const logIn=async(req,res)=>{
         return res.status(400).send({
             success:false,
             message:"Error in user Sign-in",
+            error
+        })
+    }
+}
+
+export const getallusers=async(req,res)=>{
+    try {
+        const users=await userModel.find({})
+        return res.status(200).send({
+            success:true,
+            message:"Getting all the user",
+            users
+        })
+    } catch (error) {
+        return res.status(400).send({
+            success:false,
+            message:"Error in getting the user",
             error
         })
     }
