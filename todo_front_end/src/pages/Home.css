@@ -1,0 +1,78 @@
+/* General layout settings */
+.container {
+    display: flex;
+    padding-left: 260px; /* Adjust based on the sidebar width */
+  }
+  
+  .home-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 0;
+  }
+  
+  /* Card styling */
+  .card {
+    width: 18rem;
+    margin: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-title {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+    color: #333;
+  }
+  
+  .card-subtitle {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 0.75rem;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    color: #444;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Assigned to field with ellipsis for overflow */
+  .card-body .assignedTo {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Due date styling */
+  .card-body h6 {
+    font-size: 0.9rem;
+    color: #b027fa;
+  }
+  
+  /* Complete button */
+  .complete-button {
+    background-color: #b027fa;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .complete-button:hover {
+    background-color: #9c20d1;
+  }
+  
