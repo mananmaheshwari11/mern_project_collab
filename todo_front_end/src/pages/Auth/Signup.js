@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import './Signupauth.css';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signup=()=>{
     const[name,setName]=useState("")
@@ -38,6 +38,7 @@ const Signup=()=>{
                     <input type='password' className='signup-input' placeholder='Password' value={password} onChange={(e)=>setPassword(e.target.value)} required />
                     <input type='password' className='signup-input' placeholder='Confirm Password' value={cfmpwd} onChange={(e)=>setCfmpwd(e.target.value)} required />
                     <button type='submit' className='signup-button'>Create Account</button>
+                    <p>Already Registered ?<Link to='/login'>SignIn Here</Link></p>
                     </form>
                 </div>
             </div>
