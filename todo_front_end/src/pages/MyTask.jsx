@@ -6,14 +6,37 @@ import { Modal } from "antd";
 import './Pages.css'
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useAuth } from './Auth/Authcontext';
+import moment from 'moment';
 function MyTask() {
   const[visible,setVisible]=useState(false)
-  const[update,setUpdated]=useState()
+  // const[update,setUpdated]=useState()
   const[tasks,setTasks]=useState([])
   const[users,setUsers]=useState([])
+  const[name,setName]=useState("")
+  const[select,setSelected]=useState([])
+  const[dueDate,setDate]=useState("")
+  const [auth]=useAuth()
   // handler for getting the task created by specified user and setTasks in tasks
+  const getusercreatedTask=async()=>{
+    try{
+    const {data}=await axios.get(`/api/task/usercreatedtask/${auth?.user?.id}`)
+    if(data.success){
+      setTasks(data.tasks)
+    }
+    else{
+      toast.error(data.message)
+    }
+  }
+  catch(error){
+      console.log(error)
+  }
+  }
 
-
+  useEffect(()=>{
+    getusercreatedTask();
+    //eslint-disable-next-line
+  },[])
 
   // getting all the users
   const getusers=async()=>{
@@ -52,21 +75,21 @@ function MyTask() {
   <thead>
     <tr>
       <th scope="col">Task</th>
-      <th scope="col">Assigned To</th>
+      <th scope="col">Created At</th>
       <th scope="col">Function</th>
     </tr>
   </thead>
   <tbody>
-    {/* {tasks?.map(task=>( */}
+    {tasks?.map(task=>(
     <tr>
-      <td>Task1</td>
-      <td>assignee</td>
+      <td>{task.name}</td>
+      <td>{moment(task.createdAt).format("DD-MM-YYYY")}</td>
       <td>
-        <button className='update-button' onClick={()=>{setVisible(true); setUpdated()}}><FiEdit/></button> {/* id set krni hai task ki  */}
-        <button className='delete-button' onClick={()=>{handledelete()}}><MdDelete/></button> {/* task id set krni hai */}
+        <button className='update-button' onClick={()=>{setVisible(true); setName(task.name); setSelected(task.assignedTo);  setDate(task.dueDate)}}><FiEdit/></button> 
+        <button className='delete-button' onClick={()=>{handledelete(task._id)}}><MdDelete/></button> {/* task id set krni hai */}
       </td>
     </tr>
-    {/* ))} */}
+    ))} 
     </tbody>
     </table>
           </div>
@@ -77,12 +100,16 @@ function MyTask() {
           <input type='text'
           className='form-input'
           placeholder='Enter title of task'
+          value={name}
+          onChange={(e)=>setName(e.target.value)}
           />
           <label>User Assigned</label>
           <input type='text'
           className='form-input'
-          //value daalni h assigned to
-          disabled
+          value={select?.map(s=>(
+            <h4>{s.name}</h4>
+          )).join(", ")}
+          readOnly
           />
           <div className="dropdown">
           <button
@@ -113,6 +140,8 @@ function MyTask() {
           <input type='date'
           className='form-input'
           placeholder='Enter Due Date'
+          value={moment(dueDate).format("YYYY-MM-DD")}
+          onChange={(e)=>setDate(e.target.value)}
           />
         <button className="button" type='submit'>Update</button>
         </form>

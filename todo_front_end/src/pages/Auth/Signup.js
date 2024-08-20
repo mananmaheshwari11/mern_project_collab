@@ -38,7 +38,7 @@ const Signup=()=>{
                     <input type='password' className='signup-input' placeholder='Password' value={password} onChange={(e)=>setPassword(e.target.value)} required />
                     <input type='password' className='signup-input' placeholder='Confirm Password' value={cfmpwd} onChange={(e)=>setCfmpwd(e.target.value)} required />
                     <button type='submit' className='signup-button'>Create Account</button>
-                    <p>Already Registered ?<Link to='/login'>SignIn Here</Link></p>
+                    <p className='signup-text'>Already Registered ?<Link className='signup-text-link' to='/login'>Sign In</Link> Here</p>
                     </form>
                 </div>
             </div>

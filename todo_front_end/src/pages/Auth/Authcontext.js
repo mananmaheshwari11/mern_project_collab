@@ -14,12 +14,14 @@ const AuthProvider=({children})=>{
 
 useEffect(()=>{
     const data=localStorage.getItem("auth");
+    if(data){
     const parseData=JSON.parse(data)
         setAuth({
             ...auth,
             user:parseData.user,
             token:parseData.token,
         })
+    }
 // eslint-disable-next-line
 } ,[]);
 

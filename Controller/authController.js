@@ -110,11 +110,12 @@ export const updateUser=async(req,res)=>{
         const user=await userModel.findByIdAndUpdate(id,{name:name,phone_no:phone_no},{new:true});
         return res.status(200).send({
             message:"Updated successfully",
-            success:false,
+            success:true,
             user
         })
         
     } catch (error) {
+        console.log(error)
         return res.status(400).send({
             success:false,
             message:"Error in updating the user",

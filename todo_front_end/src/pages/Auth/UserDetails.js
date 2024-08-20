@@ -3,16 +3,20 @@ import Layout from '../Layout/Layout'
 import { useAuth } from './Authcontext'
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import '../Home.css'
+import { useNavigate } from 'react-router-dom';
 const UserDetails = () => {
     const [auth]=useAuth()
     const[name,setName]=useState("")
     const[phone_no,setPhone_no]=useState("")
+    const navigate=useNavigate()
     const handleChange=async(e)=>{ 
       e.preventDefault()
       try {
         const {data} = await axios.put(`/api/auth/update/${auth?.user.id}`,{name,phone_no})
         if(data.success){
           toast.success(data.message)
+          navigate('/user/home')
         }
         else{
           toast.error(data.message)
@@ -28,7 +32,10 @@ const UserDetails = () => {
     },[auth?.user])
   return (
     <Layout>
-        <form onSubmit={handleChange}> 
+         <div className="page-container">
+      <h1 className='page-title'>User Details</h1>
+        <form onSubmit={handleChange} className='page-forms'> 
+        <h1 className='form-title'>Edit User Details</h1>
             <input type="text"
              className="form-input"
               value={name} 
@@ -40,8 +47,9 @@ const UserDetails = () => {
              value={phone_no} 
              onChange={(e)=>setPhone_no(e.target.value)} 
              placeholder="Phone number"/>
-            <button type="submit" className="button">SAVE</button>
+            <button type="submit" onClick={()=>window.alert("updates seen when logged-in again")} className="button">SAVE</button>
         </form>
+        </div>
     </Layout>
   )
 }

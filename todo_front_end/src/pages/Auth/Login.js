@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import './Signupauth.css'
 import { useAuth } from './Authcontext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const Login = () => {
     const[email,setEmail]=useState("")
     const[password,setPassword]=useState("")
@@ -21,7 +21,7 @@ const Login = () => {
                 token: data.token,
                 });
                 localStorage.setItem('auth',JSON.stringify(data))
-                navigate('/user')
+                navigate('/user/home')
             }
             else{
                 toast.error(data.message);
@@ -50,6 +50,7 @@ const Login = () => {
             onChange={(e)=>setPassword(e.target.value)} 
             required />
             <button type='submit' className='signup-button'>Login</button>
+            <p className='signup-text'>New To MAK ?<Link className='signup-text-link' to='/'>Sign Up</Link> Here</p>
             </form>
             </div>
             </div>

@@ -7,19 +7,19 @@ import Home from './pages/Home';
 import PageNotFound from './pages/PageNotFound';
 import CreateTask from './pages/CreateTask';
 import MyTask from './pages/MyTask';
-
+import UserDetails from './pages/Auth/UserDetails'
 const App = () => {
   return (
     <Routes>
       <Route path='/login' element={<Login/>}/>
-      <Route path='/signup' element={<Signup/>}/>
+      <Route path='/' element={<Signup/>}/>
       <Route path='*' element={<PageNotFound/>}/>
-      <Route path='/user' element={<Access/>}>
-      
+      <Route path='user' element={<Access/>}>
+      <Route path='/user/home' element={<Home/>}/>
+      <Route path='/user/my-task' element={<MyTask/>}/>
+      <Route path='/user/create' element={<CreateTask/>}/>
+      <Route path='/user/profile' element={<UserDetails/>}/>
       </Route>
-      <Route path='/home' element={<Home/>}/>
-      <Route path='/my-task' element={<MyTask/>}/>
-      <Route path='/create' element={<CreateTask/>}/>
     </Routes>
   )
 }

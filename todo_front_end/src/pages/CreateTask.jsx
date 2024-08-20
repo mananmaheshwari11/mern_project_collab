@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Layout from './Layout/Layout'
 import axios from 'axios'
 import './Pages.css'
+import { useAuth } from './Auth/Authcontext'
+import toast from 'react-hot-toast'
 const CreateTask = () => {
     const[name,setName]=useState("")
     const[date,setDate]=useState("")
     const[users,setUsers]=useState([])
+    const [auth]=useAuth()
+    const[refresh,setRefresh]=useState(false)
     const[select,setSelectedUsers]=useState([])
     //handler to get all users
     const getusers=async()=>{
@@ -31,19 +35,26 @@ const CreateTask = () => {
         }
       };
 
-    //handle for submitting the page
-    // const handleSubmit=async(e)=>{
-    //     e.preventDefault();
-    //     try {
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+    const handleSubmit=async(e)=>{
+        e.preventDefault();
+        try {
+          const {data}=await axios.post(`/api/task/create/${auth?.user?.id}`,{name,date,select})
+          if(data.success){
+            toast.success(data.message)
+          }
+          if(!refresh){
+            window.location.reload()
+            toast.success("Create more task")
+          }
+        } catch (error) {
+            console.log(error)
+        }
+    }
   return (
     <Layout>
          <div className="page-container">
       <h1 className='page-title'>Create your Task</h1>
-      <form className='page-forms'>
+      <form className='page-forms' onSubmit={handleSubmit}>
         <h1 className='form-title'>Task Details</h1>
         <input 
           className='form-input' 
@@ -95,6 +106,8 @@ const CreateTask = () => {
           </button>
         </div>
       </form>
+      <label>Do you want to create more than one Task. Click here to prevent screen refresh </label>
+      <br></br><input type='checkbox' onClick={(e)=>setRefresh(true)}/> Prevent
     </div>
     </Layout>
   )

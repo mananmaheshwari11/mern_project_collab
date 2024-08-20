@@ -1,5 +1,4 @@
 /* SignUp.css */
-
 .signup-container {
     display: flex;
     justify-content: center;
@@ -73,11 +72,5 @@
   
   .signup-button:hover {
     background-color: #8e2cb5;
-  }
-  .signup-text{
-    font-size: small;
-  }
-  .signup-text-link{
-    text-decoration: none;
   }
   

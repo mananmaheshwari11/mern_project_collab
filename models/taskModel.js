@@ -1,5 +1,4 @@
 import mongoose from "mongoose"
-import { Schema } from "mongoose"
 
 const taskSchema = new mongoose.Schema({
     name : {
@@ -7,15 +6,15 @@ const taskSchema = new mongoose.Schema({
         required : [true,"Task can't be blank"]
     },
     assignedBy: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.ObjectId,
         ref: 'userModel',
         required: true
     },
-    assignedTo: {
-        type: Schema.Types.ObjectId,
+    assignedTo: [{
+        type: mongoose.ObjectId,
         ref: 'userModel',
         required: [true,"Task needs to be assigned to atleast one candidate"]
-    },
+    }],
     createdAt:{
         type : Date,
         default : Date.now
