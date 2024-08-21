@@ -19,7 +19,7 @@ const Sidebar = () => {
       <Link to="/user/home" className="sidebar-link">Home</Link>
       <Link to="/user/create" className="sidebar-link">Create Task</Link>
       <Link to="/user/my-task" className="sidebar-link">My Task</Link>
-      <Link to="/user/missed" className="sidebar-link">Missed</Link>
+      <Link to="/user/missed" className="sidebar-link">Task Scheduler</Link>
       <Link to='/user/profile' className='sidebar-link'>{auth?.user?.name}</Link>
       <Link to='/login' onClick={handleLogout} className='sidebar-link'>Logout</Link>
     </div>

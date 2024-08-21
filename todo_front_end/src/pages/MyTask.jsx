@@ -16,6 +16,7 @@ function MyTask() {
   const[name,setName]=useState("")
   const[select,setSelected]=useState([])
   const[dueDate,setDate]=useState("")
+  const[selected,setSelectedUsers]=useState([])
   const [auth]=useAuth()
   // handler for getting the task created by specified user and setTasks in tasks
   const getusercreatedTask=async()=>{
@@ -36,7 +37,44 @@ function MyTask() {
   useEffect(()=>{
     getusercreatedTask();
     //eslint-disable-next-line
-  },[])
+  },[auth.user])
+
+  // permanent deletion of a task 
+  const handleDelete=async(id)=>{
+    try {
+      let ans=window.prompt("Are you sure want to delete? Write Y or leave empty")
+      if(!ans) return;
+      const {data}=await axios.delete(`/api/task/deletetask/${id}`)
+      if(data.success){
+        toast.success(data.message)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  //updating the task handle
+  const handleUpdate=async(e)=>{
+    e.preventDefault()
+    try {
+      const {data}=await axios.put(`/api/task/updatetask/${select?._id}`,{name,selected,dueDate})
+      if(data.success){
+        toast.success(data.message)
+        window.location.reload()
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // handler for selection alteration
+  const handleSelectChange = (e) => {
+    const userId = e.target.value;
+    if (selected.includes(userId)) {
+      setSelectedUsers(selected.filter(id => id !== userId));
+    } else {
+      setSelectedUsers([...selected, userId]);
+    }
+  };
 
   // getting all the users
   const getusers=async()=>{
@@ -52,20 +90,7 @@ function MyTask() {
   useEffect(()=>{
     getusers();
     },[])
-  // handler for deleting task
-  const handledelete=async(id)=>{
-    try {
-      const {data} =await axios.delete(`/api/task/delete/${id}`)
-      if(data){
-        toast.success("Task deleted successfully")
-      }
-      else{
-        toast.error("Error in task deletion")
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  
   return (
     <div>
       <Layout>
@@ -85,8 +110,8 @@ function MyTask() {
       <td>{task.name}</td>
       <td>{moment(task.createdAt).format("DD-MM-YYYY")}</td>
       <td>
-        <button className='update-button' onClick={()=>{setVisible(true); setName(task.name); setSelected(task.assignedTo);  setDate(task.dueDate)}}><FiEdit/></button> 
-        <button className='delete-button' onClick={()=>{handledelete(task._id)}}><MdDelete/></button> {/* task id set krni hai */}
+        <button className='update-button' onClick={()=>{setVisible(true); setName(task.name); setSelected(task);  setDate(task.dueDate)}}><FiEdit/></button> 
+        <button className='delete-button' onClick={()=>{handleDelete(task._id)}}><MdDelete/></button> 
       </td>
     </tr>
     ))} 
@@ -96,7 +121,7 @@ function MyTask() {
       <Modal onCancel={()=>setVisible(false)} footer={null} open={visible}>
         <h1 className='page-title'>Update Task</h1>
         {/* sabme value daalni h bcoz update me value dikhni chaiye */}
-        <form>
+        <form onSubmit={handleUpdate}>
           <input type='text'
           className='form-input'
           placeholder='Enter title of task'
@@ -104,13 +129,9 @@ function MyTask() {
           onChange={(e)=>setName(e.target.value)}
           />
           <label>User Assigned</label>
-          <input type='text'
-          className='form-input'
-          value={select?.map(s=>(
-            <h4>{s.name}</h4>
-          )).join(", ")}
-          readOnly
-          />
+    {select?.assignedTo?.map(p=>(
+      <h6>{p.name}</h6>
+))}
           <div className="dropdown">
           <button
             className="btn dropdown-toggle"
@@ -128,13 +149,14 @@ function MyTask() {
                   type="checkbox"
                   value={u._id}
                   id={`checkbox-${u._id}`}
-                  // onChange={handleSelectChange}
+                  onChange={handleSelectChange}
                 />
                 <label className="form-check-label" htmlFor={`checkbox-${u._id}`}>
                   {u.name}
                 </label>
               </div>
             ))}
+            <label className='small'>*Reselect all the user you want to assign</label>
           </ul>
         </div>
           <input type='date'

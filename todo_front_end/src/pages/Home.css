@@ -80,3 +80,10 @@
     background-color: #9c20d1;
   }
   
+  .button-link{
+    margin-left: 850px;
+    margin-top: 0px;
+    cursor: pointer;
+    color: black;
+    font-size: medium;
+  }

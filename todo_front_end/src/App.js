@@ -8,6 +8,7 @@ import PageNotFound from './pages/PageNotFound';
 import CreateTask from './pages/CreateTask';
 import MyTask from './pages/MyTask';
 import UserDetails from './pages/Auth/UserDetails'
+import Schedule from './pages/Schedule';
 const App = () => {
   return (
     <Routes>
@@ -19,6 +20,8 @@ const App = () => {
       <Route path='/user/my-task' element={<MyTask/>}/>
       <Route path='/user/create' element={<CreateTask/>}/>
       <Route path='/user/profile' element={<UserDetails/>}/>
+      <Route path='/user/missed' element={<Schedule/>}/>
+
       </Route>
     </Routes>
   )

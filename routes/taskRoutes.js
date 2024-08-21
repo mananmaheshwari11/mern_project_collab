@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 import Task from '../models/taskModel.js'
 import userModel from '../models/userModel.js';
-import { createTask, getbyUserId, getUsercreatedTask } from '../Controller/taskController.js';
+import { createTask, deleteTask, getbyUserId, getUsercreatedTask, updateTask } from '../Controller/taskController.js';
 
 
 router.post('/create/:id',createTask);
@@ -10,6 +10,10 @@ router.post('/create/:id',createTask);
 router.get('/usertask/:id',getbyUserId);
 
 router.get('/usercreatedtask/:id',getUsercreatedTask);
+
+router.put('/updatetask/:id',updateTask);
+
+router.delete('/deletetask/:id',deleteTask)
 //Create Task
 router.post('/', async (req, res) => {
     try {

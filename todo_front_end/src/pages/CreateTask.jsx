@@ -41,10 +41,11 @@ const CreateTask = () => {
           const {data}=await axios.post(`/api/task/create/${auth?.user?.id}`,{name,date,select})
           if(data.success){
             toast.success(data.message)
+            toast.success("Create more task")
+
           }
           if(!refresh){
             window.location.reload()
-            toast.success("Create more task")
           }
         } catch (error) {
             console.log(error)
@@ -106,8 +107,8 @@ const CreateTask = () => {
           </button>
         </div>
       </form>
-      <label>Do you want to create more than one Task. Click here to prevent screen refresh </label>
-      <br></br><input type='checkbox' onClick={(e)=>setRefresh(true)}/> Prevent
+      <label>Do you want to create more than one Task</label>
+      <br></br><input type='checkbox' onClick={(e)=>setRefresh(true)}/> Prevent Screen Refresh
     </div>
     </Layout>
   )

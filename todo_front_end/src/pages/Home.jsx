@@ -7,6 +7,7 @@ import './Home.css'
 import { useAuth } from './Auth/Authcontext';
 import toast from 'react-hot-toast';
 import { Modal } from "antd"
+import { Link } from 'react-router-dom';
 function Home() {
   const [tasks, setTasks] = useState([]);
   const [usertasks,setuserTask]=useState([]);
@@ -14,6 +15,8 @@ function Home() {
   const[visibletask,setVisibletask]=useState(false)
   const[visiblemytask,setVisiblemytask]=useState(false)
   const[flaunt,setFlaunt]=useState("")
+  const[visibleCount, setVisibleCount] = useState(4);
+  const[myvisibleCount, setmyVisibleCount] = useState(4);
   useEffect(() => {
     // Fetch tasks from the backend
     const fetchallTasks = async () => {
@@ -31,7 +34,7 @@ function Home() {
     try {
       const usertask=await axios.get(`/api/task/usertask/${auth?.user?.id}`)
       if(usertask.data.success){
-        toast.success(usertask.message)
+        toast.success(usertask.data.message)
         setuserTask(usertask.data.tasks)
       }
     } catch (error) {
@@ -46,10 +49,16 @@ function Home() {
     <div>
       <Layout>
       <h1 className='home-title'>One Notes</h1>
-        <div className="d-flex">
-      {tasks.map((task) => (
+      {visibleCount < tasks.length && (
+        <Link className="button-link" onClick={()=>setVisibleCount(visibleCount+4)}>
+          Show more
+        </Link>
+      )}
+      <hr/>
+        <div className="d-flex flex-wrap">
+      {tasks.slice(0,visibleCount).map((task) => (
         <>
-      <div className="card" style={{ width: "18rem" }} onClick={()=>{setVisibletask(true); setFlaunt(task)} } >
+      <div className="card" style={{ width: "12rem" }} onClick={()=>{setVisibletask(true); setFlaunt(task)} } >
       <div className="card-body">
       <h5 className="card-title">{task.name}</h5>
       <h6 className="card-subtitle mb-2 text-body-secondary">{moment(task.dueDate).format('DD-MM-YYYY')}</h6>
@@ -63,14 +72,19 @@ function Home() {
     </div>
   <hr/>
   <h1 className='home-title'>Task Assigned to me</h1>
-  <div className="d-flex">
-  {usertasks?.map((task)=>(
-  <div className="card" style={{ width: "18rem" }} onClick={()=>{setVisiblemytask(true); setFlaunt(task)} }>
+  {myvisibleCount < usertasks.length && (
+        <Link className="button-link" onClick={()=>setmyVisibleCount(myvisibleCount+4)}>
+          Show more
+        </Link>
+      )}
+      <hr/>
+  <div className="d-flex flex-wrap">
+  {usertasks?.slice(0,myvisibleCount).map((task)=>(
+  <div className="card" style={{ width: "12rem" }} onClick={()=>{setVisiblemytask(true); setFlaunt(task)} }>
   <div className="card-body">
     <h5 className="card-title">{task.name}</h5>
     <h6 className="card-subtitle mb-2 text-body-secondary">{moment(task.dueDate).format('DD-MM-YYYY')}</h6>
     <p className="card-text assignedTo">
-      {console.log(task.assignedBy)}
       Assigned By:{task.assignedBy.name}
     </p>
     <button className="complete-button">Complete</button>
@@ -101,7 +115,7 @@ function Home() {
     <label>Due Date</label>
     <h4>{moment(flaunt.dueDate).format('DD-MM-YYYY')}</h4>
     <label>Created By</label>
-    <h4>{flaunt?.assignedBy?.name}</h4>
+    <h4>{flaunt.assignedBy?.name}</h4>
     <label>Task Description</label>
     <input className="form-input" placeholder='Ask creator for description' disabled/>
   </Modal>

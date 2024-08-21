@@ -1,0 +1,51 @@
+.list-group {
+    max-width: 600px; /* Adjust this value based on your design */
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none; /* Removes default bullet points */
+  }
+  
+  .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+  }
+
+  .list-group-item:hover{
+    opacity: 0.8;
+  }
+  
+  .task-content {
+    display: flex;
+    width: 100%;
+  }
+  
+  .task-name {
+    flex-grow: 1;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    font-family: serif;
+    font-size: 18px;
+    padding: 9px;
+  }
+
+  .task-name:hover{
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .task-date {
+    text-align: right;
+    min-width: 150px;
+    padding: 9px;
+  }
+    .schedule-task{
+        font-size: 12px;
+        color: grey;
+    }  

@@ -31,10 +31,10 @@ export const createTask=async(req,res)=>{
 
 export const getbyUserId=async(req,res)=>{
     try {
-        const tasks=await taskModel.find({assignedTo:req.params.id})
+        const tasks=await taskModel.find({assignedTo:req.params.id}).populate('assignedBy', 'name').populate('assignedTo', 'name');
         return res.status(201).send({
             success:true,
-            message:"User-Task",
+            message:"Welcome to MAK Notes",
             tasks
         })
     } catch (error) {
@@ -48,7 +48,7 @@ export const getbyUserId=async(req,res)=>{
 
 export const getUsercreatedTask=async(req,res)=>{
     try {
-        const tasks=await taskModel.find({assignedBy:req.params.id}).populate('name')
+        const tasks=await taskModel.find({assignedBy:req.params.id}).populate('assignedBy', 'name').populate('assignedTo', 'name');
         return res.status(201).send({
             success:true,
             message:"Getting Task List",
@@ -59,6 +59,42 @@ export const getUsercreatedTask=async(req,res)=>{
         return res.status(400).send({
             success:false,
             message:"Error in getting the tasks",
+            error
+        })
+    }
+}
+
+export const updateTask=async(req,res)=>{
+    try {
+        const{name,selected,dueDate}=req.body
+        const {id}=req.params
+        const data=await taskModel.findByIdAndUpdate(id,{name:name,assignedTo:selected,dueDate:dueDate},{new:true})
+        return res.status(201).send({
+            success:true,
+            message:"Task Updated Successfully",
+            data
+        })
+    } catch (error) {
+        return res.status(400).send({
+            success:false,
+            message:"Error in updating the tasks",
+            error
+        })
+    }
+}
+
+export const deleteTask=async(req,res)=>{
+    try {
+        const {id}=req.params
+        const data=await taskModel.findByIdAndDelete(id)
+        return res.status(201).send({
+            success:true,
+            message:"Task Deleted Successfully"
+        })
+    } catch (error) {
+        return res.status(400).send({
+            success:false,
+            message:"Error in deleting the tasks",
             error
         })
     }

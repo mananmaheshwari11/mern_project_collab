@@ -1,11 +1,14 @@
 import React from 'react'
+import { FaThumbsDown } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 const PageNotFound = () => {
   return (
     <>
     <center>
-    <h1>Access Denied </h1>
-    <h2>Bad Request 400</h2>
+    <p className='error-text'> Oops! Page not found</p>
+          <p className='error-text'> <FaThumbsDown/></p>
+          <Link to='user/home' className='error-back'>Go to home</Link>
     </center>
     </>
   )
