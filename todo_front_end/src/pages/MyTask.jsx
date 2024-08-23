@@ -47,6 +47,9 @@ function MyTask() {
       const {data}=await axios.delete(`/api/task/deletetask/${id}`)
       if(data.success){
         toast.success(data.message)
+        setTimeout(()=>{
+          window.location.reload();
+        },1000)
       }
     } catch (error) {
       console.log(error)

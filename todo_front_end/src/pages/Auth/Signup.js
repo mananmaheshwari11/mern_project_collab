@@ -17,7 +17,9 @@ const Signup=()=>{
             const {data}=await axios.post('/api/auth/signup',{name,email,phone_no,password,cfmpwd});
             if(data.success){
                 toast.success(data.message)
-                navigate('/login')
+                setTimeout(() => {
+                    navigate('/login');
+                  }, 2000);
             }
             else{
                 toast.error(data.message)

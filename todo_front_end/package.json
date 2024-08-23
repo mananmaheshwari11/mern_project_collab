@@ -1,6 +1,5 @@
 {
   "name": "todo_front_end",
-  "proxy": "http://localhost:8080",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

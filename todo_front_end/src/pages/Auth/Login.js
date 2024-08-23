@@ -14,14 +14,14 @@ const Login = () => {
         try {
             const {data}=await axios.post('/api/auth/signin',{email,password});
             if(data.success){
-                toast.success(data.message)
+                toast.success(data.message,{duration:2000})
                 setAuth({
                     ...auth,
                 user: data.user,
                 token: data.token,
                 });
                 localStorage.setItem('auth',JSON.stringify(data))
-                navigate('/user/home')
+                navigate('/user/home');
             }
             else{
                 toast.error(data.message);

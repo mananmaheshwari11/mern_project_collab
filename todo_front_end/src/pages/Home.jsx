@@ -36,8 +36,10 @@ const completeTask=async()=>{
     const userId=auth?.user?.id;
     const {data}=await axios.post(`/api/task/completetask/${flaunt._id}`,{userId});
     if(data.success){
-      window.location.reload();
       toast.success(data.message,{duration:4000});
+      setTimeout(()=>{
+      window.location.reload();
+      },2000);
     }
     else{
       toast.error(data.message);
