@@ -8,8 +8,8 @@ import morgan from 'morgan'
 
 const app = express()
 //middleware
-app.use(morgan('dev'))
 app.use(cors())
+app.use(morgan('dev'))
 app.use(express.json());
 
 //DB connection

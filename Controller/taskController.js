@@ -99,3 +99,49 @@ export const deleteTask=async(req,res)=>{
         })
     }
 }
+
+export const completeTask = async (req, res) => {
+    try{
+    const {id} = req.params;
+    const task = await taskModel.findById(id);
+    const {userId} = req.body
+    let flag=0;
+
+    if (!task) {
+      return res.status(404).send('Task not found');
+    }
+  
+    if (!task.completedBy.includes(userId)) {
+      task.completedBy.push(userId);
+      const task_update=await taskModel.findByIdAndUpdate(id,{$pull:{assignedTo:userId}},{new:true})
+      if (task_update){
+      flag=1;
+    }
+    }
+
+    const allUsersCompleted = task.assignedTo.every(userId =>
+      task.completedBy.includes(userId)
+    );
+  
+    if (allUsersCompleted) {
+      await taskModel.findByIdAndDelete(id);
+      return res.status(200).send({
+        success:true,
+        message:'Task completed by all users and deleted',
+    })
+    }
+
+    await task.save();
+    if(flag===1){
+    return res.status(200).send({
+        success:true,
+        message:'Marked as completed 🥳🥳'
+    });
+    }
+}catch(error){
+    console.log(error)
+    return res.status(400).send({
+        success:false,
+    })
+}
+};

@@ -15,6 +15,10 @@ const taskSchema = new mongoose.Schema({
         ref: 'userModel',
         required: [true,"Task needs to be assigned to atleast one candidate"]
     }],
+    completedBy: [{ 
+        type: mongoose.ObjectId, 
+        ref: 'userModel'
+    }],
     createdAt:{
         type : Date,
         default : Date.now

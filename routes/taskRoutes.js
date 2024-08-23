@@ -2,10 +2,12 @@ import express from 'express';
 const router = express.Router();
 import Task from '../models/taskModel.js'
 import userModel from '../models/userModel.js';
-import { createTask, deleteTask, getbyUserId, getUsercreatedTask, updateTask } from '../Controller/taskController.js';
+import { completeTask, createTask, deleteTask, getbyUserId, getUsercreatedTask, updateTask } from '../Controller/taskController.js';
 
 
 router.post('/create/:id',createTask);
+
+router.post('/completetask/:id',completeTask);
 
 router.get('/usertask/:id',getbyUserId);
 
