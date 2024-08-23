@@ -7,6 +7,8 @@ import { completeTask, createTask, deleteTask, getbyUserId, getUsercreatedTask, 
 
 router.post('/create/:id',createTask);
 
+
+//New changes
 router.post('/completetask/:id',completeTask);
 
 router.get('/usertask/:id',getbyUserId);
