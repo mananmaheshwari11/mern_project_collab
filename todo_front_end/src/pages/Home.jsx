@@ -12,9 +12,9 @@ function Home() {
   const [tasks, setTasks] = useState([]);
   const [usertasks,setuserTask]=useState([]);
   const [auth]=useAuth();
-  const[visibletask,setVisibletask]=useState(false)
-  const[visiblemytask,setVisiblemytask]=useState(false)
-  const[flaunt,setFlaunt]=useState("")
+  const[visibletask,setVisibletask]=useState(false);
+  const[visiblemytask,setVisiblemytask]=useState(false);
+  const[flaunt,setFlaunt]=useState("");
   const[visibleCount, setVisibleCount] = useState(4);
   const[myvisibleCount, setmyVisibleCount] = useState(4);
   useEffect(() => {
@@ -29,6 +29,24 @@ function Home() {
     };
     fetchallTasks();
   }, []);
+
+//completion-handler
+const completeTask=async()=>{
+  try {
+    const userId=auth?.user?.id;
+    const {data}=await axios.post(`/api/task/completetask/${flaunt._id}`,{userId});
+    if(data.success){
+      window.location.reload();
+      toast.success(data.message,{duration:4000});
+    }
+    else{
+      toast.error(data.message);
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 
   const fetchUserTask=async()=>{
     try {
@@ -72,6 +90,8 @@ function Home() {
     </div>
   <hr/>
   <h1 className='home-title'>Task Assigned to me</h1>
+  {usertasks.length>0?
+  <>
   {myvisibleCount < usertasks.length && (
         <Link className="button-link" onClick={()=>setmyVisibleCount(myvisibleCount+4)}>
           Show more
@@ -87,11 +107,15 @@ function Home() {
     <p className="card-text assignedTo">
       Assigned By:{task.assignedBy.name}
     </p>
-    <button className="complete-button">Complete</button>
+    <button className="button">Complete</button>
   </div>
 </div>
 ))}
 </div>
+  </> :<>
+  <h2 className='home-title-italic'>Relax!!No task at this moment.</h2>
+  </>
+  }
   <Modal onCancel={()=>setVisibletask(false)} open={visibletask} footer={null}>
     <h1 className='page-title'>Task Details</h1>
     <label>Task Name</label>
@@ -118,6 +142,9 @@ function Home() {
     <h4>{flaunt.assignedBy?.name}</h4>
     <label>Task Description</label>
     <input className="form-input" placeholder='Ask creator for description' disabled/>
+    <button type='submit' onClick={completeTask}  className='button'>
+            Mark As Completed
+    </button>
   </Modal>
   </Layout>
     </div>

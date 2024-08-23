@@ -15,7 +15,9 @@ router.get('/usercreatedtask/:id',getUsercreatedTask);
 
 router.put('/updatetask/:id',updateTask);
 
-router.delete('/deletetask/:id',deleteTask)
+router.delete('/deletetask/:id',deleteTask);
+
+router.post('/completetask/:id',completeTask);
 //Create Task
 router.post('/', async (req, res) => {
     try {
