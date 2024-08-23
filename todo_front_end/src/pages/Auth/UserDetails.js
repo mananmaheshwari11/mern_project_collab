@@ -16,6 +16,12 @@ const UserDetails = () => {
         const {data} = await axios.put(`/api/auth/update/${auth?.user.id}`,{name,phone_no})
         if(data.success){
           toast.success(data.message)
+          const auth=JSON.parse(localStorage.getItem('auth'));
+          if(auth && auth.user){
+            auth.user.name=name;
+            auth.user.phone_no=phone_no;
+          }
+          localStorage.setItem('auth',JSON.stringify(auth))
           navigate('/user/home')
         }
         else{
@@ -47,7 +53,7 @@ const UserDetails = () => {
              value={phone_no} 
              onChange={(e)=>setPhone_no(e.target.value)} 
              placeholder="Phone number"/>
-            <button type="submit" onClick={()=>window.alert("updates seen when logged-in again")} className="button">SAVE</button>
+            <button type="submit" onClick={()=>window.alert("Please refresh to get the changes")} className="button">SAVE</button>
         </form>
         </div>
     </Layout>

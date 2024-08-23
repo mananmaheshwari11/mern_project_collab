@@ -95,8 +95,10 @@ function MyTask() {
     <div>
       <Layout>
           <div className='page-container'>
-            <div className="page-title">Created Task</div>
-            <table class="table table-striped">
+  {tasks.length>0?
+  <>
+  <div className="page-title">Created Task</div>
+  <table class="table table-striped">
   <thead>
     <tr>
       <th scope="col">Task</th>
@@ -117,6 +119,11 @@ function MyTask() {
     ))} 
     </tbody>
     </table>
+    </>:
+    <>
+    <h1 className='home-title'>No Created Task</h1>
+    </>
+}
           </div>
       <Modal onCancel={()=>setVisible(false)} footer={null} open={visible}>
         <h1 className='page-title'>Update Task</h1>

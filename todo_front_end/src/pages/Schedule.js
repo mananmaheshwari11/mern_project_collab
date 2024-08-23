@@ -6,6 +6,7 @@ import moment from 'moment'
 import './Schedule.css'
 import { Modal } from 'antd'
 import { Link } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 const Schedule = () => {
   const[filter,setFilter]=useState("")
@@ -30,6 +31,22 @@ const Schedule = () => {
     //eslint-disable-next-line
   },[]);
 
+  const completeTask=async()=>{
+    try {
+      const userId=auth?.user?.id;
+      const {data}=await axios.post(`/api/task/completetask/${flaunt._id}`,{userId});
+      if(data.success){
+        window.location.reload();
+        toast.success(data.message,{duration:4000});
+      }
+      else{
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+ 
   const handleTaskFilter=(e)=>{
     try {
       const data=e.target.value;
@@ -64,7 +81,7 @@ const Schedule = () => {
 
           >
             <option value="">Select Filter</option>
-            <option value="assigned">Assigned</option>
+            <option value="assigned" selected>Assigned</option>
             <option value="missed">Missed</option>
           </select>
         </div>
@@ -96,6 +113,9 @@ const Schedule = () => {
     <h4>{flaunt.assignedBy?.name}</h4>
     <label>Task Description</label>
     <input className="form-input" placeholder='Ask creator for description' disabled/>
+    <button type='submit' onClick={completeTask} className='button'>
+            Mark As Completed
+          </button>
   </Modal>
   
     </Layout>
