@@ -27,6 +27,10 @@ app.use(express.static(path.join(__dirname, './todo_front_end/build')));
     res.sendFile(path.join(__dirname, './todo_front_end/build', 'index.html'));
   });
 
+  app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, './todo_front_end/build', 'index.html'));
+  });
+
   app.get('/user/*', (req, res) => {
       res.sendFile(path.join(__dirname, './todo_front_end/build', 'index.html'));
   })
