@@ -12,7 +12,7 @@ route.get('/users',getallusers);
 
 route.put('/update/:id',RequireSignIn,updateUser);
 
-route.get('/user-auth',RequireSignIn,(req,res)=>{
-    res.status(200).send({ok:true});
+route.get('/user-auth', RequireSignIn, (req,res) => {
+    return res.status(200).send({ok:true})
 });
 export default route;

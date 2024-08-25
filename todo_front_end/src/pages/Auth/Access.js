@@ -15,7 +15,6 @@ export default function Access(){
             setOk(true)
         }
         else{
-            console.log("I am not OK")
             setOk(false)
         }
         };

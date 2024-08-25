@@ -35,7 +35,7 @@ const Login = () => {
          <body>
             <div className="signup-container">{/* signup-container */}
             <div className="signup-box">{/* //signup-box */}
-            <h1 className='signup-title'>Create your User Account</h1>
+            <h1 className='signup-title'>Login to your Account</h1>
             <form onSubmit={handleLogin}>
             <input type='email' 
             className='signup-input' 
