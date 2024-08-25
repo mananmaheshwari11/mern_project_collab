@@ -17,22 +17,22 @@ app.use(express.json());
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(express.static(path.join(__dirname, './todo_front_end/build')));
+app.use(express.static(path.join(__dirname, 'todo_front_end/build')));
 
 // app.get('/login', (req, res) => {
 //     res.sendFile(path.join(__dirname, '../todo_front_end/build', 'index.html'));
 //   });
   
   app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './todo_front_end/build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'todo_front_end/build', 'index.html'));
   });
 
   app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, './todo_front_end/build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'todo_front_end/build', 'index.html'));
   });
 
   app.get('/user/*', (req, res) => {
-      res.sendFile(path.join(__dirname, './todo_front_end/build', 'index.html'));
+      res.sendFile(path.join(__dirname, 'todo_front_end/build', 'index.html'));
   })
 //DB connection
 dotenv.config()
